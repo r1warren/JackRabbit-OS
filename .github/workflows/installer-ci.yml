@@ -50,6 +50,16 @@ jobs:
       - run: cargo fmt --check --manifest-path cli/Cargo.toml
       - run: cargo test --locked --manifest-path cli/Cargo.toml
       - run: cargo build --locked --release --manifest-path cli/Cargo.toml
+      - name: Smoke-test native release executable
+        shell: bash
+        run: |
+          set +e
+          output="$("${{ matrix.binary }}" install definitely-absent-release 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          test "$status" -eq 2
+          grep -F "JR-CLI-RELEASE-MISSING" <<< "$output"
       - name: Parse Windows launchers
         if: runner.os == 'Windows'
         shell: pwsh
