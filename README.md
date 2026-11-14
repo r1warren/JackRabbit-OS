@@ -219,10 +219,18 @@ pull-request flow, ownership boundaries, testing expectations, and how to
 choose the correct extension point. Read [BUILDING.md](BUILDING.md) before
 changing the application, the [Extension Development Guide](EXTENSION-DEVELOPMENT.md)
 before building an integration, and [llm.md](llm.md) when using a coding
-assistant.
+assistant. Open pull requests against the `hutch` branch; `main` holds tested
+releases.
 
 Questions and contribution discussions are welcome in the
 [JackRabbit Discord community](https://discord.gg/HeKGmh5mC).
+
+## Project history
+
+JackRabbit OS was created by christianmcgivern at ReSono-Labs. In October 2026
+the repository moved to the R1 Warren organisation and maintenance passed to
+jd-d. The tag `org-move-resonolabs-to-r1warren` marks the project as it stood
+at that point.
 
 ## License
 
