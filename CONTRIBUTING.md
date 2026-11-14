@@ -13,11 +13,15 @@ Before writing code, read:
 
 ## Branches
 
-- `main` is the stable branch. Everything on it has been tested on a physical
-  Rabbit R1.
+- `main` is the stable branch. Every change on it that affects the device has
+  been tested on a physical Rabbit R1.
 - `hutch` is where reviewed changes wait before release. Open pull requests
-  against `hutch`. Changes are kept there until they have been installed and
-  checked on real hardware, then released to `main` together and tagged.
+  against `hutch`. Any change that can alter what runs on the device, including
+  changes to the build toolchain or builder image, is kept there until it has
+  been installed and checked on real hardware. Changes with no effect on the
+  device, such as documentation, need no hardware test. Changes are then
+  released to `main` together. Releases that change what users install are
+  tagged.
 
   Why "hutch": a hutch is where rabbits are kept until they are ready to be let
   out. The name was also chosen because it is not an everyday word. Much of
