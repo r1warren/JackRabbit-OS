@@ -30,7 +30,7 @@ ARG IMAGE_VERSION=dev
 LABEL org.opencontainers.image.title="JackRabbit APK builder" \
       org.opencontainers.image.description="Pinned Linux toolchain (JDK 17, Android SDK 36, Gradle 9.5.0, CPython 3.13.2) for android/scripts/build_debug.sh" \
       org.opencontainers.image.version="${IMAGE_VERSION}" \
-      org.opencontainers.image.source="https://github.com/ReSono-Labs/JackRabbit-OS"
+      org.opencontainers.image.source="https://github.com/r1warren/JackRabbit-OS"
 
 # Base tools: curl/unzip for toolchain downloads, git, and ripgrep (required
 # by android/scripts/check_boundaries.sh / check_runtime_package.sh).

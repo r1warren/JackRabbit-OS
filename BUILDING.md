@@ -23,7 +23,7 @@ Do not commit SDK paths, signing keys, API keys, OAuth tokens, certificates, or 
 ## Docker build (recommended)
 
 No local Linux toolchain required: the pinned builder image
-(`ghcr.io/resono-labs/jackrabbit-apk-builder`, built from `android/Dockerfile`)
+(`ghcr.io/r1warren/jackrabbit-apk-builder`, built from `android/Dockerfile`)
 contains the exact JDK 17 / Android SDK 36 / Gradle 9.5.0 / CPython 3.13.2
 environment CI uses, in the layout `build_debug.sh` expects. It works on
 macOS and Windows (Docker Desktop) and produces the same APK as CI.
@@ -73,7 +73,7 @@ After bumping one, publish a new image and point the build at it:
 1. Push the change (or run the workflow directly), then run the
    **Publish APK builder image** workflow from any branch
    (`workflow_dispatch`) — it builds `android/Dockerfile` for
-   `linux/amd64` and pushes `ghcr.io/resono-labs/jackrabbit-apk-builder:v1`
+   `linux/amd64` and pushes `ghcr.io/r1warren/jackrabbit-apk-builder:v1`
    (bump to `v2` for a breaking toolchain change).
 2. Update `APK_BUILDER_IMAGE` in `.github/workflows/apk-build.yml` to the new
    immutable tag.

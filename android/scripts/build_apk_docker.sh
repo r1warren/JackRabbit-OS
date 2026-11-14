@@ -14,11 +14,11 @@
 #   ./android/scripts/build_apk_docker.sh
 #
 # Env overrides:
-#   APK_BUILDER_IMAGE   image tag to use (default: ghcr.io/resono-labs/jackrabbit-apk-builder:latest)
+#   APK_BUILDER_IMAGE   image tag to use (default: ghcr.io/r1warren/jackrabbit-apk-builder:latest)
 #
 set -euo pipefail
 
-IMAGE="${APK_BUILDER_IMAGE:-ghcr.io/resono-labs/jackrabbit-apk-builder:latest}"
+IMAGE="${APK_BUILDER_IMAGE:-ghcr.io/r1warren/jackrabbit-apk-builder:latest}"
 PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 KEYSTORE="$HOME/.android/debug.keystore"
 
