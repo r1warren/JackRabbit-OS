@@ -54,6 +54,6 @@ jobs:
           # v1 is an immutable tag: bump v1 -> v2 here after toolchain
           # changes, then update APK_BUILDER_IMAGE in apk-build.yml.
           tags: |
-            ghcr.io/resono-labs/jackrabbit-apk-builder:sha-${{ github.sha }}
-            ghcr.io/resono-labs/jackrabbit-apk-builder:v1
-            ghcr.io/resono-labs/jackrabbit-apk-builder:latest
+            ghcr.io/r1warren/jackrabbit-apk-builder:sha-${{ github.sha }}
+            ghcr.io/r1warren/jackrabbit-apk-builder:v1
+            ghcr.io/r1warren/jackrabbit-apk-builder:latest
