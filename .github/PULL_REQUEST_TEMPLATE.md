@@ -18,7 +18,7 @@ Select the smallest applicable boundary and explain the choice.
 - [ ] Documentation, installer, or build-only change
 
 I reviewed the
-[Extension Development Guide](https://github.com/ReSono-Labs/JackRabbit-OS/blob/main/EXTENSION-DEVELOPMENT.md)
+[Extension Development Guide](https://github.com/r1warren/JackRabbit-OS/blob/main/EXTENSION-DEVELOPMENT.md)
 and confirmed this change does not duplicate an existing owner.
 
 ## Scope and preservation

@@ -11,16 +11,35 @@ Before writing code, read:
    integration, Skill, Plugin, MCP server, Tool, Creation, or Card.
 4. [llm.md](llm.md) when using a coding assistant.
 
+## Branches
+
+- `main` is the stable branch. Everything on it has been tested on a physical
+  Rabbit R1.
+- `hutch` is where reviewed changes wait before release. Open pull requests
+  against `hutch`. Changes are kept there until they have been installed and
+  checked on real hardware, then released to `main` together and tagged.
+
+  Why "hutch": a hutch is where rabbits are kept until they are ready to be let
+  out. The name was also chosen because it is not an everyday word. Much of
+  this project is built by talking to coding agents, and common branch names
+  such as `next`, `dev`, `staging` or `preview` are words that come up in
+  conversation with other meanings. "Hutch" can only mean this branch.
+- If you want the newest changes and accept that they are less proven, build
+  from `hutch`. Otherwise use `main`.
+
+**Merging.** PRs into `hutch` are squashed. Releases from `hutch` to `main` use
+merge commits.
+
 ## Working together
 
 - Create one branch per focused change. Do not push feature work directly to
-  `main`.
+  `hutch` or `main`.
 - Open a draft pull request early so other contributors can see its scope and
   affected files.
 - Keep each responsibility in its existing module. Avoid catch-all utility,
   helper, common, manager, or service files.
 - If another pull request changes the same area, update your branch from the
-  latest `main`, resolve the conflict there, and retest before review.
+  latest `hutch`, resolve the conflict there, and retest before review.
 - Prefer small pull requests that preserve existing behavior. Separate local
   inference, STT/TTS, UI, and transport changes when they can be reviewed
   independently.

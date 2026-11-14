@@ -29,7 +29,7 @@ permissions:
 env:
   # Immutable tag from apk-builder-image.yml. Owner is lowercased because
   # GHCR image names must be lowercase.
-  APK_BUILDER_IMAGE: ghcr.io/resono-labs/jackrabbit-apk-builder:v1
+  APK_BUILDER_IMAGE: ghcr.io/r1warren/jackrabbit-apk-builder:v1
 
 jobs:
   build-apk:
