@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-next-line MD041 -->
 ## What does this change do?
 
 Describe the user-visible result and the problem it solves.
@@ -49,6 +50,7 @@ Physical or live-service evidence, if applicable:
 - [ ] No new dependency, network destination, permission, credential flow, or
       bundled third-party asset was added
 - [ ] Or: every such change is listed and justified below
+- [ ] Any licensing changes are listed below, or no licensing changed
 - [ ] The contribution is compatible with the repository's noncommercial
       source-available license
 - [ ] Any copied donor code has recorded revision, paths, retained/omitted
