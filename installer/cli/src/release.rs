@@ -5,6 +5,7 @@ use std::io::Read;
 use std::path::{Path, PathBuf};
 
 pub const RELEASE_ID: &str = "jackrabbit-stock-r1-current-v0.2";
+const HASH_BUFFER_SIZE: usize = 1024 * 1024;
 
 pub struct Artifact {
     pub path: &'static str,
@@ -76,6 +77,7 @@ pub const ARTIFACTS: [Artifact; 12] = [
 ];
 
 pub fn verify(root: &Path, mut progress: impl FnMut(usize, &Artifact)) -> Result<(), CommandError> {
+    let mut buffer = vec![0_u8; HASH_BUFFER_SIZE];
     for (index, artifact) in ARTIFACTS.iter().enumerate() {
         progress(index, artifact);
         let path = root.join(artifact.path);
@@ -94,7 +96,6 @@ pub fn verify(root: &Path, mut progress: impl FnMut(usize, &Artifact)) -> Result
         let mut file = File::open(&path)
             .map_err(|error| CommandError::new("JR-CLI-RELEASE-READ", error.to_string()))?;
         let mut digest = Sha256::new();
-        let mut buffer = [0_u8; 1024 * 1024];
         loop {
             let read = file
                 .read(&mut buffer)
