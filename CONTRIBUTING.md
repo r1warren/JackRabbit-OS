@@ -32,14 +32,25 @@ Before writing code, read:
   from `hutch`. Otherwise use `main`.
 
 **Merging.** PRs into `hutch` are squashed. Releases from `hutch` to `main` use
-merge commits.
+merge commits. Both branches require resolved review threads. No minimum count
+of approving reviews is configured.
+
+## Issues or pull requests
+
+Check for related work first. Open an issue when diagnosis, design, release
+scope or overlapping work needs discussion. A focused fix or docs change can
+go straight to a PR. Explain the problem and expected result in the PR if
+there's no issue. Use a draft PR to show work that still has open questions.
+
+Use `Fixes #123` when a PR fully resolves an issue. GitHub can close the issue
+when the PR merges into `hutch`, the default branch. If the fix still needs a
+published build, say it is awaiting release. Use a plain issue reference for
+partial fixes. Link duplicates to their tracking issue and explain declined work.
 
 ## Working together
 
 - Create one branch per focused change. Do not push feature work directly to
   `hutch` or `main`.
-- Open a draft pull request early so other contributors can see its scope and
-  affected files.
 - Keep each responsibility in its existing module. Avoid catch-all utility,
   helper, common, manager, or service files.
 - If another pull request changes the same area, update your branch from the
@@ -48,10 +59,12 @@ merge commits.
   inference, STT/TTS, UI, and transport changes when they can be reviewed
   independently.
 
-Git will flag conflicting edits to the same lines, but it cannot detect two
-different implementations of the same responsibility. The draft pull request
-and the extension decision in the template are how the project prevents that
-larger kind of conflict.
+Share overlapping work early in an issue or draft PR. Two changes can
+implement the same responsibility even when Git reports no line conflicts.
+
+If a PR depends on another PR, name the dependency and intended final base.
+After the dependency merges, update the remaining PR against `hutch`, review the
+smaller diff, reconcile the APK version code if affected and rerun affected checks.
 
 ## Choose the correct boundary
 
@@ -103,23 +116,58 @@ Do not describe a device behavior as working merely because it compiles or
 passes a host test. Identify what was host-tested, what was exercised against a
 real service, and what was physically accepted on an R1.
 
+For changed Markdown, run the repository's 100-column configuration with
+`markdownlint-cli` from the repository root:
+
+```sh
+markdownlint --config .markdownlint.jsonc <changed-markdown-files>
+```
+
+Code blocks and tables are exempt from the line-length rule.
+
 ## Pull requests
 
-The pull-request description must explain:
-
-- what user problem the change solves;
-- why the selected extension or module is the correct owner;
-- which existing behaviors remain unchanged;
-- which files and contracts changed;
-- how the change was tested;
-- whether physical R1 acceptance is required or complete;
-- whether dependencies, network destinations, permissions, credentials, or
-  licenses changed.
+Use the [PR template](.github/PULL_REQUEST_TEMPLATE.md) to record scope,
+ownership, validation and applicable physical R1 evidence. Request AI review
+when it helps. AI reviewer availability and verdicts are optional. Check
+findings and record the fix or reason for declining before resolving a thread.
 
 Reviewers may ask for a large change to be split when it crosses independent
 owners. A Plugin that includes a Skill, an MCP connection, and a Card may stay
 together when those pieces form one coherent integration and share one
 lifecycle.
+
+## From merge to release
+
+| State | What to expect |
+| --- | --- |
+| Proposed | An issue or draft PR is open for discussion. |
+| Ready for review | The PR describes the change and provides the checks available so far. |
+| Integrated | The PR is merged into `hutch` and can be included in an identified test build. |
+| Promoted | The maintainer has merged the accepted batch into `main` through a release PR. |
+| Released | Release notes identify the downloadable build and how to install it. |
+
+We integrate focused changes into `hutch`, test identified builds and settle
+the final candidate when the batch is ready. The maintainer, currently
+[@jd-d](https://github.com/jd-d), opens a release PR when the batch, acceptance
+evidence and release material are ready. Releases have no fixed schedule.
+
+1. Record the exact candidate revision, included changes and known limitations.
+   For installable builds, record versions, hashes, signing identity where
+   applicable, and relevant host, live-service and physical R1 evidence.
+2. If `hutch` advances, test the changed candidate or use a release branch
+   pinned to the accepted revision. Confirm the release PR matches the accepted
+   content before merging. A release-candidate tag and GitHub pre-release can
+   identify the exact revision and build shared for testing.
+3. For installable releases, tag the promoted `main` revision and publish the
+   accepted artifacts, checksums, supported starting states and install or
+   update steps. Check the published downloads against the accepted hashes.
+   Include known limitations and any data erasure.
+4. Update the download guidance and list the included fixes in the release
+   notes. Add a comment on each fixed issue with a link to the release that
+   actually includes its fix.
+
+Docs-only batches can be promoted without a binary release.
 
 ## License
 

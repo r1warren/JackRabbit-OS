@@ -1,229 +1,168 @@
 # JackRabbit
 
-**A standalone, non-commercial community voice system for the Rabbit R1.**
+**Give your Rabbit R1 a new burrow.** JackRabbit is a noncommercial community
+voice system for the R1. Talk with it, check your Calendar and Tasks, and add
+Cards of your own. The app, local data and management console run on the R1.
+Voice and connected services still need their respective providers.
 
-> **Installing from the stock Rabbit R1 image?** Read the complete
-> [stock-R1 installation instructions](installer/INSTALL.md) before starting.
-> Do not begin the installation until you have reviewed the document fully.
+## Get started
 
-JackRabbit turns the Rabbit R1 into a Voice-first device with native OpenAI Realtime conversations, an on-device agent runtime, local data, Cards, and a same-LAN management console. It keeps live microphone and speaker traffic in the native Android WebRTC path while the local runtime owns agents, tools, configuration, storage, and extensions.
+- **Stock Rabbit R1:** Start with the
+  [installation guide and download status](installer/INSTALL.md).
+  The guide links to the complete `jackrabbit-current-v0.2.zip` bundle and gives
+  its checksum. Read the whole guide before starting. **Installation erases R1 data.**
+- **Already running JackRabbit:** Follow [Using JackRabbit](USER-GUIDE.md) for
+  setup and daily use. For the [v0.4.18 device candidate][apk-candidate], check
+  the release notes and confirm it fits your device and setup before trying it.
+  This is a pre-release APK for an existing compatible setup.
+- **Building or contributing:** Start with [Building JackRabbit](BUILDING.md)
+  and [Contributing](CONTRIBUTING.md). Use `main` for stable source and `hutch`
+  for changes being prepared for release.
 
-Here, standalone means that the product runtime, storage, management site, and UI live directly on the R1. Network-backed AI and connected services still require their respective providers.
+On macOS, the [v0.2.1 installer patch][mac-patch] updates the matching host
+installer inside the complete v0.2 bundle. It contains no Android images.
+On Windows, read the open reports on [verification][windows-verify],
+[preloader detection][windows-preloader] and [driver setup][windows-driver]
+before starting. Windows installer maintenance is on the [roadmap](ROADMAP.md).
 
-JackRabbit is under active development and runs on physical R1 hardware.
+| Voice | Cards | Calendar |
+| --- | --- | --- |
+| ![JackRabbit Voice on the R1](images/r1-voice-page.png) | ![JackRabbit Cards on the R1](images/r1-cards-page.png) | ![Calendar Card showing an upcoming event](images/r1-calendar-card.png) |
 
-Join the [JackRabbit community on Discord](https://discord.gg/HeKGmh5mC) for
-discussion, installation help, and contribution coordination.
+## Start your first Voice conversation
 
-<p align="center">
-  <img src="images/r1-voice-page.png" width="30%" alt="JackRabbit Voice page on a Rabbit R1">
-  &nbsp;
-  <img src="images/r1-cards-page.png" width="30%" alt="JackRabbit Cards page on a Rabbit R1">
-  &nbsp;
-  <img src="images/r1-calendar-card.png" width="30%" alt="JackRabbit Calendar Card showing an upcoming event">
-</p>
+1. On the R1, open **Settings → Wi-Fi** and connect it to the same network as
+   your browser.
+2. Open **Settings → Management** and visit the displayed HTTPS address in the
+   browser. Follow the
+   [management setup instructions](USER-GUIDE.md#connect-wi-fi-and-open-management)
+   to trust the device certificate, then enter the pairing code.
+3. In the browser, open **Overview → Your Profile**, enter your name and select
+   **Save name**. Check for **Name saved.** so Voice can greet you by name.
+4. In **AI & Voice**, connect ChatGPT/Codex or an OpenAI Platform API key.
+   JackRabbit uses one access method at a time. To switch from ChatGPT/Codex
+   to Platform access, disconnect ChatGPT/Codex first. Choose your models,
+   then return to Voice and press the microphone control. See
+   [AI setup and model selection](USER-GUIDE.md#connect-openai-access).
 
-<p align="center"><em>Voice, Cards, and a real Calendar event on the 480×640 R1 display.</em></p>
+## What you can do
 
-## What JackRabbit does
+| Area | What it does |
+| --- | --- |
+| Voice | Talk over native OpenAI Realtime audio and use supported tools during a conversation. |
+| Cards and local data | See Calendar and Tasks on the R1. Connect Mail or Calendar and use their supported Voice tools. |
+| Background Agent | Delegate a goal, track progress and collect results in the on-device workspace. |
+| Extensions | Add Skills, Plugins, MCP connections or static Creations. |
+| Management | Use a paired browser on the same network to manage AI, connections and extensions. |
+| R1 controls | Configure Wi-Fi, Bluetooth, volume, brightness and keep-screen-awake. |
 
-| Area | Current behavior |
-|---|---|
-| Voice | Native WebRTC audio with `idle`, `connecting`, `live`, `responding`, and `error` states plus local MCP tools |
-| AI access | One platform-wide connection using either ChatGPT/Codex device authorization or an owner-supplied OpenAI Platform API key |
-| Cards | Built-in Calendar and Tasks Cards plus enabled static Creations |
-| Personal data | Local Mail, Calendar, and Tasks domains exposed to Voice through bounded tools |
-| Background Agent | OpenAI Agents SDK runs with tools, workspace files, cancellation, progress, safe reasoning summaries, and artifact delivery |
-| Extensions | Agent Skills, Agent Plugins, MCP connections, tool permissions, and static Creations |
-| Management | Paired same-LAN HTTPS console for runtime, AI, connections, extensions, and Background Agent |
-| Device controls | Wi-Fi, Bluetooth, volume, brightness, keep-screen-awake behavior, runtime status, and restart |
+The [user guide](USER-GUIDE.md) covers device controls, Cards, management,
+connections and troubleshooting.
 
-The native camera preview, outward-facing open position, return-to-privacy behavior, Creation QR capture, and direct image handoff into a live Voice session are implemented on the R1.
+### Voice, camera and Cards
 
-## Voice on the R1
+Voice and Cards are the first two pages of the R1's home screen. The native app
+is designed for its 480×640 display, touch screen, scroll wheel and side button.
+The camera can open outward for a live preview, then return to its privacy
+position. Use it to scan a Creation QR code or hand an image directly to an
+active Voice conversation.
 
-Voice is page one and Cards is page two. The native application is the device HOME surface and is designed specifically for the R1's 480×640 display, touch screen, scroll wheel, side button, audio path, and power behavior.
+| Settings | Mail and Calendar connections |
+| --- | --- |
+| ![JackRabbit Settings page](images/r1-settings-page.png) | ![Management page showing Mail and Calendar connections](images/web_management/connections.png) |
 
-The current native Voice path provides:
+Calendar and Tasks are built-in Cards. Enabled Creations appear alongside them.
+For account limits, sync timing and what each tool can do, see
+[Calendar](USER-GUIDE.md#connect-calendar), [Mail](USER-GUIDE.md#connect-mail)
+and [Tasks](USER-GUIDE.md#use-tasks).
+An installed Creation may fail to open on an image with no active Android
+WebView provider. The [WebView recovery steps][webview-recovery] explain how to
+recover without reflashing or reinstalling the Creation.
 
-- OpenAI Realtime audio over WebRTC, without routing high-rate audio through Python or MCP.
-- Runtime-selected access, text model, Realtime model, reasoning effort, and personalized greeting.
-- Local MCP tools in the same live Voice session.
-- Native screen-awake behavior while JackRabbit is visible.
-- Real session states instead of simulated activity.
+### Management console
 
-The subscription catalog currently includes GPT-5.6 Sol, Terra, and Luna for text, and GPT-Realtime 2.1, GPT-Realtime 2.1 Mini, and GPT-Live 1 for Voice. OpenAI Platform choices are filtered from models returned by the account's `/models` response.
+The R1 serves its management console over HTTPS to a browser on the same local
+network. Pair with a six-digit, one-time code that expires after five minutes.
+A paired browser session lasts 30 minutes.
 
-## Cards and local data
+| Overview | AI & Voice |
+| --- | --- |
+| ![JackRabbit management Overview](images/web_management/overview.png) | ![JackRabbit AI and Voice settings](images/web_management/ai-voice.png) |
 
-<p align="center">
-  <img src="images/r1-settings-page.png" width="32%" alt="JackRabbit Settings page">
-  &nbsp;
-  <img src="images/web_management/connections.png" width="62%" alt="JackRabbit management Connections page showing Mail and Calendar">
-</p>
+From Management you can check device and runtime status, edit your Voice profile,
+download the R1's TLS certificate, and restart the runtime. You can also manage
+AI access and models, configure Mail and Calendar accounts, import and manage
+extensions, and inspect Background Agent runs.
 
-The Cards deck always includes Calendar and Tasks, followed by enabled Creations.
+The Library distinguishes owner instructions (`SKILLS.MD`) from portable
+Agent Skills packaged as Plugins. It also manages MCP connections, tool access
+and Creations. See the [Library guide](USER-GUIDE.md#manage-the-library) for
+day-to-day use and the [Extension Development Guide](EXTENSION-DEVELOPMENT.md)
+for formats and boundaries.
 
-- **Calendar:** Up to two ICS-file, ICS-subscription, or CalDAV sources. The runtime synchronizes on a five-minute cadence and projects upcoming events to the native Card. Provider capabilities control whether create, update, and delete operations are allowed.
-- **Tasks:** Local title-and-completion records available to Voice and the native Tasks Card. Tasks do not currently have due dates, schedules, reminders, or notifications.
-- **Mail:** Up to three IMAP/SMTP accounts with five-minute synchronization. Reading, read/unread changes, draft creation, and sending are supported. Sending requires an exact, single-use confirmation bound to the draft and user utterance. JackRabbit exposes no Mail delete, trash, expunge, or purge tool.
+![JackRabbit Library with Skills, Plugins, MCP, Tools and Creations](images/web_management/library.png)
 
-The management console owns account configuration and status. It does not expose Mail message content.
+### Background Agent
 
-## Management console
+Voice can delegate a goal to the on-device Background Agent worker. You can
+watch progress, cancel a run and collect its artifacts. The queue can hold up
+to eight runs and allows one active run per origin. The workspace confines
+paths, rejects symbolic links and writes files atomically. Artifacts selected
+for delivery are moved to durable storage.
 
-The R1 serves its management console over HTTPS to a browser on the same local network. Pairing uses a six-digit, one-time code that expires after five minutes. A paired browser session lasts 30 minutes. State-changing requests are protected by the paired session, matching HTTPS origin, and CSRF token.
+The R1 has completed multi-turn research runs and delivered Markdown artifacts
+through the native runner view. The
+[Background Agent guide](USER-GUIDE.md#use-background-agent) covers setup,
+default limits and which details appear in Run Logs and Reasoning Logs.
 
-<p align="center">
-  <img src="images/web_management/overview.png" width="48%" alt="JackRabbit management Overview page">
-  &nbsp;
-  <img src="images/web_management/ai-voice.png" width="48%" alt="JackRabbit AI and Voice settings">
-</p>
+![JackRabbit Background Agent settings and run logs](images/web_management/background-agent.png)
 
-From the browser, the owner can:
+## Security and privacy
 
-- Check device and runtime status, edit the Voice profile, download the local TLS certificate, and restart the runtime.
-- Connect or disconnect ChatGPT/Codex authorization, save a Platform API key, and choose access, models, and reasoning effort.
-- Configure Mail and Calendar connections without exposing their content in the management API.
-- Import and manage Skills, Plugins, MCP connections, and Creations.
-- Configure the Background Agent and inspect run status and safe operational logs.
+- Platform, subscription and connection credentials pass through an Android
+  bridge and are sealed with Android Keystore-backed AES-256-GCM. The Python
+  database stores no plaintext credentials.
+- The local API token and management TLS key use device-protected storage.
+  The certificate identity is bound to the active Wi-Fi or Ethernet address
+  when available. Management writes require a paired session, a matching HTTPS
+  origin and a CSRF token.
+- Mail sending requires a single-use confirmation tied to the exact draft.
+  Voice has no Mail deletion tool. The management API exposes account
+  configuration and status without returning message content.
+- Imported archives are checked before activation. Outbound MCP tools are
+  limited by both the configured permissions and the agent's audience.
+- Transcripts, summaries, memories, domain records, run records and workspace
+  files are stored locally. Network-backed AI, Mail and Calendar sync, web
+  search and outbound MCP tools send relevant data to their respective services.
 
-See [Using JackRabbit](USER-GUIDE.md) for the operating guide.
+The project makes no claim of a formal security audit. See the
+[privacy reminders](USER-GUIDE.md#privacy-reminders) for what to check before
+connecting an account or importing an extension.
 
-## Skills, Plugins, MCP, Tools, and Creations
+## How it fits together
 
-> **Building an extension or integration?** Read the
-> [Extension Development Guide](EXTENSION-DEVELOPMENT.md) before choosing a
-> Skill, Plugin, MCP server, built-in Tool, Creation, or native feature. It
-> documents the formats JackRabbit actually accepts, including Plugin-owned
-> Cards.
+Android owns the device UI, input, camera, hardware controls and live WebRTC
+audio. The embedded Python runtime owns providers, agents, tools and storage.
+The web module serves the management interface. The app targets Android API 36,
+requires API 31 or newer, and is built for ARM64.
 
-<p align="center">
-  <img src="images/web_management/library.png" width="72%" alt="JackRabbit Library page with Skills, Plugins, MCP, Tools, and Creations">
-</p>
-
-JackRabbit keeps these extension boundaries distinct:
-
-- **Agent instructions** are exact `SKILLS.MD` documents assigned to Voice or Background Agent from the current Library UI.
-- **Skills** use the open Agent Skills `SKILL.md` format. JackRabbit currently loads packaged Skills through Agent Plugins.
-- **Plugins** use the open Agent Plugins `plugin.json` format and may contain Skills, MCP declarations, and one JackRabbit Card extension. Imports are preflighted before confirmation and support enable, disable, replacement, removal, quarantine, and interrupted-operation recovery.
-- **MCP** is the model-facing tool boundary. JackRabbit has a local MCP server and manages outbound MCP connections, discovered tools, audiences, and permission intersections.
-- **Tools** are visible according to their declared Voice, Background Agent, or shared audience.
-- **Creations** are bounded static ZIP packages with an `index.html`. Enabled Creations appear as Cards in a confined native WebView. QR descriptors may identify Creation sources, and linked sources must use public HTTPS URLs.
-
-Imports enforce archive size, path, link, encryption, and compression constraints. JackRabbit does not claim an extension marketplace or a general arbitrary-code trust model.
-
-### Known issue: an installed Creation does not open
-
-The current CipherOS-derived image can retain `com.android.webview` while
-Android selects no active WebView provider. Creation installation still
-succeeds, but opening the installed Card fails. This is an image/provider-state
-issue, not a failed Creation import.
-
-The verified recovery for an already-installed R1 is documented under
-[Troubleshooting in Using JackRabbit](USER-GUIDE.md#an-installed-creation-does-not-open).
-It does not require reflashing or reinstalling the Creation.
-
-## Background Agent
-
-<p align="center">
-  <img src="images/web_management/background-agent.png" width="72%" alt="JackRabbit Background Agent settings and run logs">
-</p>
-
-Voice can delegate a bounded goal to one on-device Background Agent worker. The worker uses the OpenAI Agents SDK rather than a second custom agent loop. Runs move through explicit states including queued, running, reviewing, repairing, completed, failed, and cancelled.
-
-The default run limits are 300 seconds, 24 model turns, 40 tool calls, two review rounds, and an 8 MiB workspace. The queue holds up to eight runs and permits one active run for an origin. Workspace paths are confined, symbolic links are rejected, writes are atomic, and publishable artifacts move to durable storage.
-
-Run Logs report lifecycle and delivery events. Reasoning Logs contain provider-returned reasoning summaries and bounded operational metadata such as tool name, order, duration, and error state. They do not expose private chain-of-thought, tool arguments, or tool results.
-
-This execution path has completed real multi-turn research goals on the R1, published Markdown artifacts into durable workspace storage, displayed live progress and safe reasoning summaries, and delivered the latest run through the native runner view.
-
-## Architecture
-
-```text
-Rabbit R1 hardware and retained Cipher device services
-                         │
-               JackRabbit Android HOME app
-             ┌───────────┼────────────┐
-             │           │            │
-        Native UI   Native WebRTC   Device controls
-             │           │
-             │     OpenAI Realtime
-             │
-       Embedded Python runtime
-     ┌───────┼─────────┬──────────────┐
-     │       │         │              │
- Agents SDK  MCP   Domain services   HTTPS management
-     │       │    Mail/Calendar/Tasks      │
-     └───────┴─────────┬───────────────────┘
-                       │
-            SQLite + device-sealed secrets
-```
-
-The Android project keeps device UI, design/input/power primitives, individual features, runtime hosting, and motor integration in separate modules. The Python runtime owns versioned storage migrations, OpenAI providers, the Agents SDK path, tools, data domains, extensions, and management routes. Dependencies flow toward small public contracts rather than shared catch-all modules.
-
-## Security and privacy boundaries
-
-- Platform, subscription, and connection secrets cross a narrow Android bridge and are sealed with Android Keystore-backed AES-256-GCM. Plaintext credentials are not stored in the Python database.
-- The local API token and management TLS key are device-protected. The certificate identity is bound to the active local Wi-Fi or Ethernet address when available.
-- Management is limited to paired same-LAN HTTPS sessions and enforces origin and CSRF checks on mutations.
-- Mail sending requires explicit confirmation, and Mail deletion is not exposed to the agent.
-- Imported archives are inspected before activation; MCP tool access is reduced by both declared permission and agent audience.
-- OpenAI requests, Mail and Calendar synchronization, web search, and configured outbound MCP servers necessarily send relevant data to those external services.
-- Transcripts, summaries, memories, domain records, run records, and workspace data are stored locally in SQLite or device-owned storage according to their subsystem.
-
-No formal security audit is claimed.
-
-## Use JackRabbit
-
-Starting from an already-running JackRabbit R1:
-
-1. Open **Settings → Wi-Fi** and connect the R1 to the same network as your browser.
-2. Open **Settings → Management** and note the displayed HTTPS address and pairing code.
-3. Open that address in the browser, trust the certificate shown by the R1, and enter the pairing code.
-4. **Do not skip this:** on **Overview**, find **Your Profile**, enter your name
-   in **Your name**, and choose **Save name**. Confirm that the page reports
-   **Name saved.** JackRabbit uses this for your personalized Voice greeting.
-5. In **AI & Voice**, connect either ChatGPT/Codex or an OpenAI Platform API key. OAuth must be disconnected before Platform access can be activated; completing OAuth makes it the active platform-wide connection.
-6. Choose an available text model, Realtime model, and reasoning effort for the active connection.
-7. Return to Voice and press the microphone control to start a session.
-8. Optionally add Mail or Calendar connections and enable extensions from the management console.
-
-For device controls, Cards, data connections, extensions, Background Agent, and troubleshooting, read [Using JackRabbit](USER-GUIDE.md).
-
-## Repository map
-
-- `android/` — native HOME application, R1 features, runtime host, and device integration.
-- `runtime/` — supervised on-device Python runtime, providers, agents, tools, storage, data domains, and extensions.
-- `web/` — responsive same-LAN management interface.
-- `images/` — screenshots used by this README and the operating guide.
-- `BUILDING.md` and `USER-GUIDE.md` — build and operating guidance.
-- `CONTRIBUTING.md` and `EXTENSION-DEVELOPMENT.md` — contribution flow and extension package contracts.
-- `llm.md` — coding-assistant architecture guidance.
-
-The current schema is migration version 42. The Android application targets API 36, requires API 31 or newer, is built for ARM64, and embeds Python 3.13 with `openai-agents` 0.18.3.
-
-## Project principles
-
-- Ship connected behavior, not mockups or simulated product states.
-- Keep one owner for each responsibility and preserve one-way module dependencies.
-- Use the OpenAI Agents SDK for applicable agents and MCP for model-facing tools.
-- Follow Agent Skills and Agent Plugins formats within their actual scope.
-- Keep subscription device authorization separate from credentials for external MCP services.
-- Keep hardware and live-provider claims grounded in reproducible behavior.
+See the [architecture diagram and repository map](llm.md#architecture) and the
+[build guide](BUILDING.md) for module boundaries and toolchain requirements.
+The [SQLite migration list][migrations] records the schema version for this checkout.
 
 ## Contributing
 
-Start with [Contributing to JackRabbit](CONTRIBUTING.md). It explains branch and
-pull-request flow, ownership boundaries, testing expectations, and how to
-choose the correct extension point. Read [BUILDING.md](BUILDING.md) before
-changing the application, the [Extension Development Guide](EXTENSION-DEVELOPMENT.md)
-before building an integration, and [llm.md](llm.md) when using a coding
-assistant. Open pull requests against the `hutch` branch; `main` holds tested
-releases.
+Open an issue to discuss a problem or idea, or send a focused PR directly to
+`hutch`. Changes that affect the device need physical R1 evidence before
+promotion to `main`. For installable changes, the release notes tell you which
+download contains the fix. See the [contribution guide](CONTRIBUTING.md) for the
+full process and the [roadmap](ROADMAP.md) for current priorities.
 
-Questions and contribution discussions are welcome in the
-[JackRabbit Discord community](https://discord.gg/HeKGmh5mC).
+See the [architecture notes](llm.md) and [extension guide](EXTENSION-DEVELOPMENT.md)
+to find the right place for a change.
+
+Join the [JackRabbit Discord](https://discord.gg/HeKGmh5mC) for discussion and
+installation help.
 
 ## Project history
 
@@ -250,3 +189,11 @@ This is a source-available noncommercial license, not an OSI-approved license.
 Third-party components remain subject to their own licenses. JackRabbit is an
 independent community project and is not affiliated with, endorsed by, or
 sponsored by rabbit inc.
+
+[apk-candidate]: https://github.com/r1warren/JackRabbit-OS/releases/tag/v0.4.18-device-candidate
+[mac-patch]: https://github.com/r1warren/JackRabbit-OS/releases/tag/installer-macos-v0.2.1
+[windows-verify]: https://github.com/r1warren/JackRabbit-OS/issues/13
+[windows-preloader]: https://github.com/r1warren/JackRabbit-OS/issues/14
+[windows-driver]: https://github.com/r1warren/JackRabbit-OS/issues/15
+[webview-recovery]: USER-GUIDE.md#an-installed-creation-does-not-open
+[migrations]: runtime/resono_runtime/storage/migrations/__init__.py
